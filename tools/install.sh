@@ -24,7 +24,7 @@ mkfifo /tmp/luna-install
 echo "[ ] Installing..."
 luna-send-pub -i 'luna://com.webos.appInstallService/dev/install' '{"id":"com.ares.defaultName","ipkUrl":"/tmp/hbchannel.ipk","subscribe":true}' >/tmp/luna-install &
 LUNA_PID=$!
-result="$(timeout -t 15 egrep -i -m 1 'installed|failed' /tmp/luna-install || echo timeout)"
+result="$(timeout 15 egrep -i -m 1 'installed|failed' /tmp/luna-install || echo timeout)"
 kill -term $LUNA_PID
 rm /tmp/luna-install
 
